@@ -1,0 +1,95 @@
+Problem 1 - Data Modeling
+
+Created Models using Django ORM
+It consists of 3 tables Station, Weather and Statistics
+Station record is added to stations table and used as ForeignKey in other 2 tables
+
+class Station(models.Model):
+    modified = models.DateTimeField(_('Modified'), default=timezone.now)
+    name = models.CharField(_("Station Name"), unique=True, max_length=50)
+    created = models.DateTimeField(_('Created'), default=timezone.now, editable=False)
+
+    class Meta:
+        ordering = ('-name',)
+        get_latest_by = 'modified'
+
+class Weather(models.Model):
+    date = models.CharField(_("Date"), max_length=20)
+    precipitation = models.IntegerField(_("Precipitation"))
+    max_temp = models.IntegerField(_("Maximum temperature"))
+    min_temp = models.IntegerField(_("Minimum temperature"))
+    station = models.ForeignKey(Station, on_delete=models.CASCADE, related_name='records', null=True, blank=True)
+
+    modified = models.DateTimeField(_('Modified'), default=timezone.now)
+    created = models.DateTimeField(_('Created'), default=timezone.now, editable=False)
+
+    class Meta:
+        get_latest_by = 'modified'
+        unique_together = ("date", "station")
+
+class Statistics(models.Model):
+    avg_max_temp = models.FloatField(_("Average Maximum Temperature"))
+    avg_min_temp = models.FloatField(_("Average minimum temperature"))
+    year = models.CharField(_("Year of Stats"), max_length=20, null=True)
+    total_acc_ppt = models.FloatField(_("Total accumulated precipitation"))
+    station = models.ForeignKey(Station, on_delete=models.CASCADE, related_name='stats', null=True, blank=True)
+
+    modified = models.DateTimeField(_('Modified'), default=timezone.now)
+    created = models.DateTimeField(_('Created'), default=timezone.now, editable=False)
+
+    class Meta:
+        get_latest_by = 'year'
+        verbose_name_plural = _("Statistics")
+
+
+Problem 2 - Ingestion
+
+To ingest data in databased from txt files, created a Django management command ingest (src/weather_app/management/commands/ingest.py)
+Reads all the files at provided directory location using pandas library, and ingested data using bulk upload method of django ORM
+
+
+Problem 3 - Data Analysis
+
+After ingesting Weather records, used ORM query to get average temperature and total precipitation by grouping data based on year
+and stored in Statistics table.
+
+
+Problem 4 - REST API
+
+
+Used Django Framework to create REST APIs
+Created serializers for serialized response, created APIView based views, filtered data based on date and station and
+ordered data based on date
+
+Note: Commented another approach which has Model mixins based Views
+
+/api/weather
+/api/weather/stats
+/admin for django admin dashboard
+/swagger for API documentation
+
+
+Added unit test case for APIs in tests files in django app (weather_app)
+
+
+Extra Credit - Deployment
+
+Also added approach in README file
+
+# AWS Deployment
+
+### Deploy Django API:
+
+To deploy the Django API and database on AWS:
+
+1. Use AWS Elastic Beanstalk to deploy and run the web application.
+2. Configure a load balancer to handle incoming traffic and distribute it to multiple instances of the Django application.
+3. Use Amazon RDS to host a PostgreSQL database. Configure database access in Django to securely connect to the RDS instance.
+4. Use AWS S3 to store text files.
+5. Store the ingested data in the RDS database.
+
+### Conclusion
+
+- This approach provides a scalable, secure, and easily managed deployment of the Django API, database, and data ingestion code
+
+- The load balancer and auto-scaling features of AWS Elastic Beanstalk and Amazon RDS ensure that the API and database can handle changing levels of traffic.

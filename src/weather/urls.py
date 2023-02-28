@@ -24,9 +24,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/', include(router.urls)),
-    path('weather/', WeatherList.as_view(), name='weather-list'),
-    path('weather/stats/', StatsList.as_view(), name='stats-list'),
+    # path('api/v2/', include(router.urls)),
+    path('api/weather/', WeatherList.as_view(), name='weather-list'),
+    path('api/weather/stats/', StatsList.as_view(), name='stats-list'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
