@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from weather_app.models import Stats, Weather
+from weather_app.models import Statistics, Weather, Station
 
 
 class WeatherTestCase(APITestCase):
@@ -11,8 +11,10 @@ class WeatherTestCase(APITestCase):
 
     def setUp(self):
         super().setUp()
+        self.station = Station.objects.create(name="USC00110072")
         self.weather = Weather.objects.create(
-            station_name="USC001107", date="1985010", max_temp=20, min_temp=19, precipitation=12)
+            station=self.station, date="20141235", max_temp=-122, min_temp=-217, precipitation=12
+        )
 
     def test_get_weather(self):
         response = self.client.get(reverse("weather-list"))
@@ -28,9 +30,10 @@ class StatsTestCase(APITestCase):
 
     def setUp(self):
         super().setUp()
-        self.stats = Stats.objects.create(
-            date='2022-01-01',
-            station_name='Test Station',
+        self.station = Station.objects.create(name="USC00110072")
+        self.stats = Statistics.objects.create(
+            year='2022-01-01',
+            station=self.station,
             avg_max_temp=20.0,
             avg_min_temp=30.0,
             total_acc_ppt=10.0
