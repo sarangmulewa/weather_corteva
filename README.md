@@ -61,7 +61,7 @@ AWS account (if deploying to AWS)
 - Ingesting the data:<br>
 
 ```bash
-    python src/manage.py ingest
+    python src/manage.py ingest wx_data_directory_path
 ```
 
 - Run the python server using command: <br>
@@ -72,13 +72,13 @@ AWS account (if deploying to AWS)
 
 - And other functionalities can be accessed through these API links: <br>
   http://127.0.0.1:8000/swagger/<br>
-  http://127.0.0.1:8000/weather<br>
-  http://127.0.0.1:8000/weather/stats/
+  http://127.0.0.1:8000/api/weather<br>
+  http://127.0.0.1:8000/api/weather/stats/
 
 - With query params it can also be accessed such as : <br>
-  http://127.0.0.1:8000/weather/?date=20100202
-  http://127.0.0.1:8000/weather/?station__name=USC00257715
-  http://127.0.0.1:8000/weather/?station__name=USC00257715&date=20100202
+  http://127.0.0.1:8000/api/weather/?date=20100202
+  http://127.0.0.1:8000/api/weather/?station__name=USC00257715
+  http://127.0.0.1:8000/api/weather/?station__name=USC00257715&date=20100202
   <br><br>
 
 # Tests
