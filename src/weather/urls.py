@@ -6,7 +6,7 @@ from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 
 from weather_app.views import WeatherList, StatsList
-from weather_app.views import WeatherViewSet, StatsViewSet
+# from weather_app.views import WeatherViewSet, StatsViewSet
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -18,13 +18,13 @@ schema_view = get_schema_view(
     permission_classes=[permissions.AllowAny],
 )
 
-router = DefaultRouter()
-router.register(r'weather', WeatherViewSet)
-router.register(r'weather/stats', StatsViewSet)
+# router = DefaultRouter()
+# router.register(r'weather', WeatherViewSet)
+# router.register(r'weather/stats', StatsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    # path('api/', include(router.urls)),
     path('weather/', WeatherList.as_view(), name='weather-list'),
     path('weather/stats/', StatsList.as_view(), name='stats-list'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

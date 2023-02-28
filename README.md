@@ -76,9 +76,9 @@ AWS account (if deploying to AWS)
   http://127.0.0.1:8000/weather/stats/
 
 - With query params it can also be accessed such as : <br>
-  http://127.0.0.1:8000/api/weather/?date=20100202
-  http://127.0.0.1:8000/api/weather/?station__name=USC00257715
-  http://127.0.0.1:8000/api/weather/?station__name=USC00257715&date=20100202
+  http://127.0.0.1:8000/weather/?date=20100202
+  http://127.0.0.1:8000/weather/?station__name=USC00257715
+  http://127.0.0.1:8000/weather/?station__name=USC00257715&date=20100202
   <br><br>
 
 # Tests
