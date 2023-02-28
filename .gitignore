@@ -1,0 +1,22 @@
+logs
+.venv
+.idea
+migrations/
+__pycache__
+
+
+src/weather/__pycache__/__init__.cpython-310.pyc
+        new file:   src/weather/__pycache__/settings.cpython-310.pyc
+        new file:   src/weather/__pycache__/urls.cpython-310.pyc
+        new file:   src/weather/__pycache__/wsgi.cpython-310.pyc
+
+  new file:   src/weather_app/__pycache__/__init__.cpython-310.pyc
+        new file:   src/weather_app/__pycache__/admin.cpython-310.pyc
+        new file:   src/weather_app/__pycache__/apps.cpython-310.pyc
+        new file:   src/weather_app/__pycache__/models.cpython-310.pyc
+        new file:   src/weather_app/__pycache__/serializers.cpython-310.pyc
+        new file:   src/weather_app/__pycache__/tests.cpython-310-pytest-7.1.2.pyc
+        new file:   src/weather_app/__pycache__/tests.cpython-310.pyc
+        new file:   src/weather_app/__pycache__/views.cpython-310.pyc
+
+        new file:   src/weather_app/management/commands/__pycache__/ingest.cpython-310.pyc
